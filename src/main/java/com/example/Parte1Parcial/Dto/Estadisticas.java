@@ -8,9 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 
 public class Estadisticas {
-    private long contadorMutanteADN;
+    private double contadorMutanteADN;
 
-    private long contadorHumanoADN;
+    private double contadorHumanoADN;
 
     private double proporcion;
 }

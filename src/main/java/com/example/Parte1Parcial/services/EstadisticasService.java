@@ -20,8 +20,8 @@ public class EstadisticasService {
     @Transactional
     public Estadisticas getEstadisticas() throws Exception {
     try {
-        long contadorMutante = estadisticasRepository.contadorMutante();
-        long contadorHumano = estadisticasRepository.contadorHumano();
+        double contadorMutante = estadisticasRepository.contadorMutante();
+        double contadorHumano = estadisticasRepository.contadorHumano();
         double proporcion = estadisticasRepository.contadorMutante() / estadisticasRepository.contadorHumano();
 
         return new Estadisticas(contadorMutante, contadorHumano, proporcion);
