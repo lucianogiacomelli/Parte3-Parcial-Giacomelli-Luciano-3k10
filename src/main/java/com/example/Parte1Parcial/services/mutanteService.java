@@ -1,17 +1,16 @@
 package com.example.Parte1Parcial.services;
-import com.example.Parte1Parcial.entities.pruebasADN;
+import com.example.Parte1Parcial.entities.PruebasADN;
 import com.example.Parte1Parcial.repositories.mutanteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.Parte1Parcial.entities.Algoritmo.mutantePrueba;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
-public class mutanteService implements BaseService<pruebasADN> {
+public class mutanteService implements BaseService<PruebasADN> {
 
     private mutanteRepository mutanteRepository;
     private mutantePrueba mutantePrueba;
@@ -24,9 +23,9 @@ public class mutanteService implements BaseService<pruebasADN> {
 
     @Override
     @Transactional
-    public List<pruebasADN> findAll() throws Exception {
+    public List<PruebasADN> findAll() throws Exception {
     try{
-        List <pruebasADN> entities = mutanteRepository.findAll();
+        List <PruebasADN> entities = mutanteRepository.findAll();
         return entities;
 
     } catch (Exception e){
@@ -36,9 +35,9 @@ public class mutanteService implements BaseService<pruebasADN> {
 
     @Override
     @Transactional
-    public pruebasADN findByID(Long id) throws Exception {
+    public PruebasADN findByID(Long id) throws Exception {
         try{
-            Optional<pruebasADN> entityOptional = mutanteRepository.findById(id);
+            Optional<PruebasADN> entityOptional = mutanteRepository.findById(id);
             return entityOptional.get();
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -50,7 +49,7 @@ public class mutanteService implements BaseService<pruebasADN> {
 
     @Override
     @Transactional
-    public pruebasADN save(pruebasADN entity) throws Exception {
+    public PruebasADN save(PruebasADN entity) throws Exception {
         try{
             boolean esMutante = new mutantePrueba().esMutante(entity.getPrueba());
             entity.setResultado(esMutante);
@@ -64,10 +63,10 @@ public class mutanteService implements BaseService<pruebasADN> {
 
     @Override
     @Transactional
-    public pruebasADN update(Long id, pruebasADN entity) throws Exception {
+    public PruebasADN update(Long id, PruebasADN entity) throws Exception {
         try{
-            Optional <pruebasADN> entityOptional = mutanteRepository.findById(id);
-            pruebasADN pruebas = entityOptional.get();
+            Optional <PruebasADN> entityOptional = mutanteRepository.findById(id);
+            PruebasADN pruebas = entityOptional.get();
             pruebas = mutanteRepository.save(entity);
             return pruebas;
 
@@ -92,37 +91,11 @@ public class mutanteService implements BaseService<pruebasADN> {
         }
     }
 
-/*
-    @Override
-    @Transactional
-    public boolean mutant(String[] dna) throws Exception {
-        try{
-            return mutantePrueba.esMutante(dna);
-        } catch (Exception e){
-            System.out.println("Da error");
-            throw new Exception(e.getMessage());
-        }
-    }
-*/
-@Override
+
 @Transactional
 public boolean mutant(String[] dna) throws Exception {
-    // No capturar excepciones aquí, solo propaga
+    // No capture excepciones en este servicio, para hacerlo en el controlador debido a los errores de matriciales
     return mutantePrueba.esMutante(dna);
 }
 
-/*
-    @Override
-    @Transactional
-    public boolean mutant(String[] dna) throws Exception {
-        try {
-            System.out.println("ADN recibido: " + Arrays.toString(dna));
-            return mutantePrueba.esMutante(dna);
-        } catch (Exception e) {
-            System.out.println("Error en el método mutant: " + e.getMessage());
-            e.printStackTrace(); // Imprime el stacktrace completo para más detalles
-            throw new Exception("Error en la lógica de detección del mutante: " + e.getMessage());
-        }
-    }
-*/
 }

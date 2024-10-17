@@ -8,5 +8,4 @@ public interface BaseService <E>{
     public E save (E entity) throws Exception;
     public E update (Long id, E entity) throws Exception;
     public boolean delete (Long id) throws Exception;
-    public boolean mutant (String [] dna) throws Exception;
 }

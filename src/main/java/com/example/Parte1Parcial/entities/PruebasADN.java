@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 
 
-public class pruebasADN implements Serializable {
+public class PruebasADN implements Serializable {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

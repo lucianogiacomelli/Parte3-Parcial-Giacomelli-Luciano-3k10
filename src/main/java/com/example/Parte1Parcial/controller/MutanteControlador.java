@@ -1,7 +1,7 @@
 package com.example.Parte1Parcial.controller;
 
 
-import com.example.Parte1Parcial.entities.pruebasADN;
+import com.example.Parte1Parcial.entities.PruebasADN;
 import com.example.Parte1Parcial.services.mutanteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,9 +41,9 @@ public class MutanteControlador {
 
 
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody pruebasADN pruebas){
+    public ResponseEntity<?> save(@RequestBody PruebasADN pruebas){
         try{
-            pruebasADN pruebaGuardada = mutanteService.save(pruebas);
+            PruebasADN pruebaGuardada = mutanteService.save(pruebas);
 
             if (pruebaGuardada.isResultado()){
                 System.out.println("Es un mutante.");
@@ -62,7 +62,7 @@ public class MutanteControlador {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody pruebasADN pruebas){
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody PruebasADN pruebas){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(mutanteService.update(id, pruebas));
         } catch (Exception e) {
@@ -83,10 +83,13 @@ public class MutanteControlador {
     //Ejercicio Solicitado
 
     @PostMapping("/mutant/")
-    public ResponseEntity<?> verificarMutante(@RequestBody pruebasADN pruebasADN){
+    public ResponseEntity<?> verificarMutante(@RequestBody PruebasADN pruebasADN){
         try{
 
             boolean esMutante = mutanteService.mutant(pruebasADN.getPrueba());
+            pruebasADN.setResultado(esMutante);
+            PruebasADN pruebaGuardada = mutanteService.save(pruebasADN);
+
             if (esMutante){
                 return ResponseEntity.status(HttpStatus.OK).body("Es mutante");
             } else {
