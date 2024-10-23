@@ -51,7 +51,7 @@ public class mutanteService implements BaseService<PruebasADN> {
     @Transactional
     public PruebasADN save(PruebasADN entity) throws Exception {
         try{
-            boolean esMutante = new mutantePrueba().esMutante(entity.getPrueba());
+            boolean esMutante = mutantePrueba.esMutante(entity.getPrueba());
             entity.setResultado(esMutante);
 
             entity = mutanteRepository.save(entity);

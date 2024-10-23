@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface EstadisticasRepository extends JpaRepository<PruebasADN, Long> {
     @Query("SELECT COUNT(p) FROM PruebasADN p WHERE p.resultado = true")
-    int contadorMutante();
+    double contadorMutante();
 
     @Query("SELECT COUNT(p) FROM PruebasADN p WHERE p.resultado = false")
-    int contadorHumano();
+    double contadorHumano();
 }

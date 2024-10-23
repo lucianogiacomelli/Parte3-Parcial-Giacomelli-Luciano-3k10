@@ -3,16 +3,14 @@ package com.example.Parte1Parcial.entities.Algoritmo;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Component
+@Component //Se utiliza esta notacion para que sea un singleton
 
 public class mutantePrueba implements Serializable {
 
@@ -23,6 +21,10 @@ public class mutantePrueba implements Serializable {
     public boolean esMutante (String[] dna) throws Exception {
 
         errores(dna);
+
+        secuenciasVerdaderas.clear();
+
+
         int n = dna.length;
         int secuencias = 0;
 
