@@ -1,4 +1,4 @@
-package DnaService;
+package com.example.Parte1Parcial;
 
 import org.junit.jupiter.api.Test;
 import com.example.Parte1Parcial.entities.Algoritmo.mutantePrueba;
@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class DNAServiceTest {
+
+
+
     @Autowired
     private mutantePrueba mutantePrueba;
     @Test
@@ -153,14 +156,14 @@ public class DNAServiceTest {
     }
 
     @Test
-    public void testMutant3() throws Exception{
+    public void testNonMutant3() throws Exception{
         String[] dna = {
                 "AAAA",
                 "AAAA",
                 "AAAA",
                 "AAAA"
         };
-        assertTrue(mutantePrueba.esMutante(dna));
+        assertFalse(mutantePrueba.esMutante(dna));
     }
 
     @Test

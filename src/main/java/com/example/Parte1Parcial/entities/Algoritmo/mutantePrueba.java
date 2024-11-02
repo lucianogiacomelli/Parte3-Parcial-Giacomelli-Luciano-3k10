@@ -62,22 +62,28 @@ public class mutantePrueba implements Serializable {
     private int RevisarDiagonales(String[] dna) {
         int n = dna.length;
         int secuenciasEncontradas = 0;
-        boolean diagonalPrimaria = IntStream.range(0, n - 3)
-                .anyMatch(i -> IntStream.range(0, n - 3)
-                        .anyMatch(j -> Secuencia(dna[i].charAt(j), dna[i + 1].charAt(j + 1), dna[i + 2].charAt(j + 2), dna[i + 3].charAt(j + 3))));
-        if (diagonalPrimaria){
-            secuenciasEncontradas = secuenciasEncontradas + 1;
+
+        // Diagonales principales (de izquierda a derecha)
+        for (int i = 0; i < n - 3; i++) {
+            for (int j = 0; j < n - 3; j++) {
+                if (Secuencia(dna[i].charAt(j), dna[i + 1].charAt(j + 1), dna[i + 2].charAt(j + 2), dna[i + 3].charAt(j + 3))) {
+                    secuenciasEncontradas++;
+                }
+            }
         }
 
-        boolean diagonalSecundaria = IntStream.range(0, n - 3)
-                .anyMatch(i -> IntStream.range(3, n)
-                        .anyMatch(j -> Secuencia(dna[i].charAt(j), dna[i + 1].charAt(j - 1), dna[i + 2].charAt(j - 2), dna[i + 3].charAt(j - 3))));
-        if (diagonalSecundaria ){
-
-            secuenciasEncontradas = secuenciasEncontradas + 1;
+        // Diagonales secundarias (de derecha a izquierda)
+        for (int i = 0; i < n - 3; i++) {
+            for (int j = 3; j < n; j++) {
+                if (Secuencia(dna[i].charAt(j), dna[i + 1].charAt(j - 1), dna[i + 2].charAt(j - 2), dna[i + 3].charAt(j - 3))) {
+                    secuenciasEncontradas++;
+                }
+            }
         }
+
         return secuenciasEncontradas;
     }
+
 
 
     private boolean Secuencia(char a, char b, char c, char d) {
